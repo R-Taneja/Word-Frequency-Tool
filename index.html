@@ -28,7 +28,7 @@
     
     <script type="text/javascript">
         var tinyMDE = new TinyMDE.Editor({textarea: 'inputtext'});
-        tinyMDE.setContent("Enter your text here...");
+        tinyMDE.setContent("");
     
         function decider() {
             if (document.getElementById("results").innerHTML != "") {
@@ -75,8 +75,10 @@
         function boldWord() {
             removeBold();
             var input = document.getElementById("wordToBold");
-            var boldedText = document.getElementById("inputtext").value.replaceAll(input.value, `**${input.value}**`);
-            tinyMDE.setContent(boldedText);
+            if (input.value != "") {
+                var boldedText = document.getElementById("inputtext").value.replaceAll(input.value, `**${input.value}**`);
+                tinyMDE.setContent(boldedText);   
+            }
         }
     </script>
 </body>
