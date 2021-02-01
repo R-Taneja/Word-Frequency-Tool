@@ -7,9 +7,9 @@
 <body style="text-align: center;">
     <div class="center">
         <h1>Improve your writing</h1>
-        <p>Reduce redundancy with our free word frequency counter.</p>
+        <p>Reduce the number of repeated words in a paragraph with our free word frequency counter.</p>
         <br>
-        <textarea name="inputtext" id="inputtext" placeholder="Copy your text here..." style="max-height: 500px;"></textarea>
+        <textarea name="inputtext" id="inputtext" placeholder="Enter your text here..." style="max-height: 500px;"></textarea>
         <input type="submit" id="submitbutton" value="Submit" style="width: 100%;" onclick="decider()">
         <br>
         <p style="white-space: pre-wrap" id="results"></p>
@@ -52,10 +52,8 @@
 
 <style>
     .center {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      -ms-transform: translate(-50%, -50%);
-      transform: translate(-50%, -50%);
-    }
+    top: 50%;
+    left: 50%;
+    transform: translate3d(-50%,-50%, 0);
+    position: absolute;
 </style>
