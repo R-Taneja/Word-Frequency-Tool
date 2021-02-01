@@ -62,7 +62,7 @@
         
         function boldWord() {
             var input = document.getElementById("wordToBold");
-            var boldedText = document.getElementById("inputtext").value.replace(input.value, `**${input.value}**`);
+            var boldedText = document.getElementById("inputtext").value.replaceAll(input.value, `**${input.value}**`);
             tinyMDE.setContent(boldedText);
         }
     </script>
