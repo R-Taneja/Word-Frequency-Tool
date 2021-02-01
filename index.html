@@ -3,33 +3,32 @@
 <head>
     <title>Word Frequency Counter by Rohan Taneja</title>
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.css">
-    <script src="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script>
+    <script src="https://unpkg.com/tiny-markdown-editor@0.1.2/dist/tiny-mde.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://unpkg.com/tiny-markdown-editor@0.1.2/dist/tiny-mde.min.css" />
 </head>
 <body>
     <div class="center">
         <h1>Improve your writing</h1>
         <p>Reduce the number of repeated words in a paragraph with our free word frequency counter.</p>
         <br>
-        <textarea name="inputtext" id="inputtext" placeholder="Enter your text here..." style="max-height: 500px;"></textarea>
+        <div class="txtcontainer" style="border: thin solid #dbdbdb; border-radius: 2px;">
+            <textarea name="inputtext" id="inputtext" placeholder="Enter your text here..." style="max-height: 500px;"></textarea>
+        </div>
         <br>
         <input type="submit" id="submitbutton" value="Submit" style="width: 100%;" onclick="decider()">
         <br>
         <p style="white-space: pre-wrap" id="results"></p>
         <br>
-        <button onclick="findHi()">Find hi</button>
+        <div style="display: flex;">
+            <input type="text" name="wordToBold" id="wordToBold" placeholder="Word to bold..." style="float: left;">
+            <button onclick="boldWord()" style="float: right;">Bold Word</button>
+        </div>
     </div>
     
-    <script>
-        var simplemde = new SimpleMDE({ 
-            autofocus: true,
-            toolbar: false,
-            forceSync: true,
-            spellChecker: false,
-            status: false,
-            element: document.getElementById("inputtext") 
-        });
-        
+    <script type="text/javascript">
+        var tinyMDE = new TinyMDE.Editor({textarea: 'inputtext'});
+        tinyMDE.setContent("Enter your text here...");
+    
         function decider() {
             if (document.getElementById("results").innerHTML != "") {
                 document.getElementById("results").innerHTML = "";
@@ -61,10 +60,10 @@
             document.getElementById("submitbutton").value = "Check again";
         };
         
-        function findHi() {
-            newText = document.getElementById("inputtext").value.replace(/hi/g, "**hi**");
-            simplemde.value = newText;
-            //document.getElementById("inputtext").value = newText;
+        function boldWord() {
+            var input = document.getElementById("wordToBold");
+            var boldedText = document.getElementById("inputtext").value.replace(input.value, `**${input.value}**`);
+            tinyMDE.setContent(boldedText);
         }
     </script>
 </body>
