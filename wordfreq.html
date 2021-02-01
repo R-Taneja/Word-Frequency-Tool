@@ -13,6 +13,8 @@
         <input type="submit" id="submitbutton" value="Submit" style="width: 100%;" onclick="decider()">
         <br>
         <p style="white-space: pre-wrap" id="results"></p>
+        <br>
+        <button onclick="findHi()">Find hi</button>
     </div>
     
     <script>
@@ -46,6 +48,11 @@
             
             document.getElementById("submitbutton").value = "Check again";
         };
+        
+        function findHi() {
+            var newText = document.getElementById("inputtext").value.replace(/hi/g, "**hi**");
+            document.getElementById("inputtext").value = newText;
+        }
     </script>
 </body>
 </html>
