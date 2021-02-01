@@ -3,13 +3,16 @@
 <head>
     <title>Word Frequency Counter by Rohan Taneja</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.css">
+    <script src="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script>
 </head>
-<body style="text-align: center;">
+<body>
     <div class="center">
         <h1>Improve your writing</h1>
         <p>Reduce the number of repeated words in a paragraph with our free word frequency counter.</p>
         <br>
         <textarea name="inputtext" id="inputtext" placeholder="Enter your text here..." style="max-height: 500px;"></textarea>
+        <br>
         <input type="submit" id="submitbutton" value="Submit" style="width: 100%;" onclick="decider()">
         <br>
         <p style="white-space: pre-wrap" id="results"></p>
@@ -18,6 +21,15 @@
     </div>
     
     <script>
+        var simplemde = new SimpleMDE({ 
+            autofocus: true,
+            toolbar: false,
+            forceSync: true,
+            spellChecker: false,
+            status: false,
+            element: document.getElementById("inputtext") 
+        });
+        
         function decider() {
             if (document.getElementById("results").innerHTML != "") {
                 document.getElementById("results").innerHTML = "";
@@ -50,17 +62,10 @@
         };
         
         function findHi() {
-            var newText = document.getElementById("inputtext").value.replace(/hi/g, "**hi**");
-            document.getElementById("inputtext").value = newText;
+            newText = document.getElementById("inputtext").value.replace(/hi/g, "**hi**");
+            simplemde.value = newText;
+            //document.getElementById("inputtext").value = newText;
         }
     </script>
 </body>
 </html>
-
-<style>
-    .center {
-    top: 50%;
-    left: 50%;
-    transform: translate3d(-50%,-50%, 0);
-    position: absolute;
-</style>
