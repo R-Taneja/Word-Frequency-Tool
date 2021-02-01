@@ -10,8 +10,43 @@
         <p>Reduce redundancy with our free word frequency counter.</p>
         <br>
         <textarea name="inputtext" id="inputtext" placeholder="Copy your text here..." style="max-height: 500px;"></textarea>
-        <input type="submit" value="Submit" style="width: 100%;">
+        <input type="submit" id="submitbutton" value="Submit" style="width: 100%;" onclick="decider()">
+        <br>
+        <p style="white-space: pre-wrap" id="results"></p>
     </div>
+    
+    <script>
+        function decider() {
+            if (document.getElementById("results").innerHTML != "") {
+                document.getElementById("results").innerHTML = "";
+                textCounter();
+            } else {
+                textCounter();
+            }
+        }
+        
+        function textCounter() {
+            var pattern = /\w+/g,
+                string = document.getElementById("inputtext").value;
+                matchedWords = string.match( pattern );
+            var counts = matchedWords.reduce(function ( stats, word ) {
+                if ( stats.hasOwnProperty( word ) ) {
+                    stats[ word ] = stats[ word ] + 1;
+                } else {
+                    stats[ word ] = 1;
+                }
+                return stats;
+            }, {} );
+            
+            for (const word in counts) {
+                var resultsText = document.getElementById("results");
+                resultsText.textContent += `${word}: ${counts[word]}`;
+                resultsText.textContent += `\n`;
+            }
+            
+            document.getElementById("submitbutton").value = "Check again";
+        };
+    </script>
 </body>
 </html>
 
