@@ -67,7 +67,13 @@
             document.getElementById("submitbutton").value = "Check again";
         };
         
+        function removeBold() {
+            var unboldedText = document.getElementById("inputtext").value.replaceAll("**", "");
+            tinyMDE.setContent(unboldedText);
+        }
+        
         function boldWord() {
+            removeBold();
             var input = document.getElementById("wordToBold");
             var boldedText = document.getElementById("inputtext").value.replaceAll(input.value, `**${input.value}**`);
             tinyMDE.setContent(boldedText);
