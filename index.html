@@ -9,7 +9,12 @@
 <body>
     <div class="center">
         <h1>Improve your writing</h1>
-        <p>Reduce the number of repeated words in a paragraph with our free word frequency counter.</p>
+        <p>Reduce the number of repeated words in a paragraph with our free word frequency counter. Try typing one of the repeated words into the search box and clicking "Find" to see exactly where they are in your text.<br><br>Note: the word frequency counter and search box are case-sensitive.</p>
+        <br>
+        <div style="display: flex;">
+            <input type="text" name="wordToBold" id="wordToBold" placeholder="Search for a word..." style="float: left;">
+            <button onclick="boldWord()" style="float: right;">Find</button>
+        </div>
         <br>
         <div class="txtcontainer" style="border: thin solid #dbdbdb; border-radius: 2px;">
             <textarea name="inputtext" id="inputtext" placeholder="Enter your text here..." style="max-height: 500px;"></textarea>
@@ -18,11 +23,6 @@
         <input type="submit" id="submitbutton" value="Submit" style="width: 100%;" onclick="decider()">
         <br>
         <p style="white-space: pre-wrap" id="results"></p>
-        <br>
-        <div style="display: flex;">
-            <input type="text" name="wordToBold" id="wordToBold" placeholder="Word to bold..." style="float: left;">
-            <button onclick="boldWord()" style="float: right;">Bold Word</button>
-        </div>
     </div>
     
     <script type="text/javascript">
@@ -53,7 +53,11 @@
             
             for (const word in counts) {
                 var resultsText = document.getElementById("results");
-                resultsText.textContent += `${word}: ${counts[word]}`;
+                if (counts[word] == 1) {
+                    resultsText.textContent += `\"${word}\": ${counts[word]} time`;
+                } else {
+                    resultsText.textContent += `\"${word}\": ${counts[word]} times`;
+                }
                 resultsText.textContent += `\n`;
             }
             
