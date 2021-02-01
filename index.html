@@ -22,6 +22,7 @@
         <br>
         <input type="submit" id="submitbutton" value="Submit" style="width: 100%;" onclick="decider()">
         <br>
+        <h1 id="resultsHeader"></h1>
         <p style="white-space: pre-wrap" id="results"></p>
     </div>
     
@@ -54,13 +55,15 @@
             for (const word in counts) {
                 var resultsText = document.getElementById("results");
                 if (counts[word] == 1) {
-                    resultsText.textContent += `\"${word}\": ${counts[word]} time`;
+                    resultsText.innerHTML += `${word}: ${counts[word]} time`;
                 } else {
-                    resultsText.textContent += `\"${word}\": ${counts[word]} times`;
+                    resultsText.innerHTML += `${word}: ${counts[word]} times`;
                 }
                 resultsText.textContent += `\n`;
             }
             
+            var resultsHeader = document.getElementById("resultsHeader");
+            resultsHeader.textContent = "Results";
             document.getElementById("submitbutton").value = "Check again";
         };
         
