@@ -1,4 +1,4 @@
-# Word-Frequency-Counter
+# Word-Frequency
 A website that can help improve your writing by pointing out overused or repeated words.
 
 Note: it's usable, but it isn't perfect yet. I'm working on it!
