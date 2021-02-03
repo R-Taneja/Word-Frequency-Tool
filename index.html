@@ -13,11 +13,11 @@
 <body>
     <div class="center">
         <h1>Improve your writing</h1>
-        <p>Reduce the number of repeated words in a paragraph with this free word frequency counter. Try typing one of the repeated words into the search box and clicking "Search" to see exactly where they are in your text.<br><br>Hint: to bold/unbold text, use the Cmnd + B or Ctrl + B keyboard shortcuts.</p>
+        <p>Reduce the number of repeated words in a paragraph with this free word frequency counter. Try typing one of the repeated words into the search box and clicking "Search" to see exactly where they are in your text.</p>
         <br>
         <div style="display: flex;">
-            <input type="text" name="wordToBold" id="wordToBold" placeholder="Search for a word..." style="float: left;">
-            <button onclick="boldWord()" style="float: right;">Search</button>
+            <input type="text" name="wordToHighlight" id="wordToHighlight" placeholder="Search for a word..." style="float: left;">
+            <button onclick="highlightWord()" style="float: right;">Search</button>
         </div>
         <br>
         <div id="editor"></div>
@@ -44,7 +44,7 @@
     
         function decider() {
             quill.formatText(0, quill.getLength(), {
-                'bold': false,
+                'background': false,
             });
             inputText = quill.getText();
             inputTextLower = inputText.toLowerCase();
@@ -98,22 +98,24 @@
                 return indices;
         }
         
-        function boldWord() {
-            if (document.getElementById("wordToBold").value != "") {
+        function highlightWord() {
+            if (document.getElementById("wordToHighlight").value != "") {
                 quill.formatText(0, quill.getLength(), {
-                    'bold': false,
+                    'background': false
                 });
-                var wordToBold = document.getElementById("wordToBold").value;
-                wordToBold = wordToBold.toLowerCase();
+                var wordToHighlight = document.getElementById("wordToHighlight").value;
+                wordToHighlight = wordToHighlight.toLowerCase();
                 inputText = quill.getText();
-                var wordToBoldWithRegexWordBoundary = `\\b${wordToBold}\\b`
-                let re = new RegExp(wordToBoldWithRegexWordBoundary, "g");
+                var wordToHighlightWithRegexWordBoundary = `\\b${wordToHighlight}\\b`
+                let re = new RegExp(wordToHighlightWithRegexWordBoundary, "g");
                 let match = re.test(inputText);
                 if (match) {
                    let indices = getIndicesOf(re);
-                   let length = wordToBold.length;
+                   let length = wordToHighlight.length;
                    indices.forEach(index =>
-                        quill.formatText(index, length, "bold", true));
+                        quill.formatText(index, length, {
+                       'background': 'rgb(34,139,34)'
+                   }));
                 }
             }
         }
