@@ -13,11 +13,11 @@
 <body>
     <div class="center">
         <h1>Improve your writing</h1>
-        <p>Reduce the number of repeated words in a paragraph with this free word frequency counter. Try typing one of the repeated words into the search box and clicking "Search" to see exactly where they are in your text.<br><br>Note: the word frequency counter and search box are case-sensitive.</p>
+        <p>Reduce the number of repeated words in a paragraph with this free word frequency counter. Try typing one of the repeated words into the search box and clicking "Search" to see exactly where they are in your text. Hint: to bold/unbold text, use the Cmnd + B or Ctrl + B keyboard shortcuts.<br><br>Note: the search box is case-sensitive.</p>
         <br>
         <div style="display: flex;">
-            <input type="text" name="wordToHighlight" id="wordToHighlight" placeholder="Search for a word..." style="float: left;">
-            <button onclick="highlightWord()" style="float: right;">Search</button>
+            <input type="text" name="wordToBold" id="wordToBold" placeholder="Search for a word..." style="float: left;">
+            <button onclick="boldWord()" style="float: right;">Search</button>
         </div>
         <br>
         <div id="editor"></div>
@@ -30,6 +30,7 @@
     
     <script type="text/javascript">
         var inputText;
+        var inputTextLower;
         
         var options = {
               modules: {
@@ -44,8 +45,9 @@
                 'bold': false,
             });
             inputText = quill.getText();
+            inputTextLower = inputText.toLowerCase();
             
-            console.log(inputText);
+            console.log(inputTextLower);
             if (inputText != "\n") {
                 document.getElementById("results").innerHTML = "";
                 textCounter();
@@ -56,7 +58,7 @@
         
         function textCounter() {
             var pattern = /\w+/g,
-                string = inputText;
+                string = inputTextLower;
                 matchedWords = string.match( pattern );
             var counts = matchedWords.reduce(function ( stats, word ) {
                 if ( stats.hasOwnProperty( word ) ) {
@@ -80,7 +82,35 @@
             var resultsHeader = document.getElementById("resultsHeader");
             resultsHeader.textContent = "Results";
             document.getElementById("submitbutton").value = "Check again";
-        };
+        }
+        
+        function getIndicesOf(word) {
+            var wordRegex = new RegExp(word, "gi");
+            var regex = wordRegex,result,indices=[];
+            while((result=regex.exec(inputText)))
+                {
+                    indices.push(result.index);
+                }
+                return indices;
+        }
+        
+        function boldWord() {
+            quill.formatText(0, quill.getLength(), {
+                'bold': false,
+            });
+            var wordToBold = document.getElementById("wordToBold").value;
+            wordToBold = wordToBold.toLowerCase();
+            inputText = quill.getText();
+            var wordToBoldWithRegexWordBoundary = `\\b${wordToBold}\\b`
+            let re = new RegExp(wordToBoldWithRegexWordBoundary, "g");
+            let match = re.test(inputText);
+            if (match) {
+               let indices = getIndicesOf(re);
+               let length = wordToBold.length;
+               indices.forEach(index =>
+                    quill.formatText(index, length, "bold", true));
+            }
+        }
     </script>
 </body>
 </html>
