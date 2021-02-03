@@ -26,6 +26,8 @@
         <br>
         <h1 id="resultsHeader"></h1>
         <p style="white-space: pre-wrap" id="results"></p>
+        <table id="table">
+        </table>
     </div>
     
     <script type="text/javascript">
@@ -58,6 +60,8 @@
         }
         
         function textCounter() {
+            var tableText = document.getElementById("table");;
+            tableText.innerHTML += "<tr><th>Word</th><th>Frequency</th></tr>"
             var pattern = /\w+/g,
                 string = inputTextLower;
                 matchedWords = string.match( pattern );
@@ -71,13 +75,11 @@
             }, {} );
             
             for (const word in counts) {
-                var resultsText = document.getElementById("results");
                 if (counts[word] == 1) {
-                    resultsText.innerHTML += `${word}: ${counts[word]} time`;
+                    tableText.innerHTML += `<tr><td>${word}</td><td>${counts[word]} time</td></tr>`;
                 } else {
-                    resultsText.innerHTML += `${word}: ${counts[word]} times`;
+                    tableText.innerHTML += `<tr><td>${word}</td><td>${counts[word]} times</td></tr>`;
                 }
-                resultsText.textContent += `\n`;
             }
             
             var resultsHeader = document.getElementById("resultsHeader");
