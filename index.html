@@ -76,11 +76,7 @@
             let sortedCounts = Object.entries(counts).sort((a, b) => b[1] - a[1]);
             
             for (const count of sortedCounts) {
-              if (count[1] == 1) {
-                tableText.innerHTML += `<tr><td>${count[0]}</td><td>${count[1]} time</td></tr>`;
-              } else {
-                tableText.innerHTML += `<tr><td>${count[0]}</td><td>${count[1]} times</td></tr>`;
-              }
+                tableText.innerHTML += `<tr><td>${count[0]}</td><td>${count[1]}</td></tr>`;
             }
             
             var resultsHeader = document.getElementById("resultsHeader");
