@@ -26,7 +26,6 @@
         <input type="submit" id="submitbutton" value="Submit" style="width: 100%;" onclick="decider()">
         <br>
         <h1 id="resultsHeader"></h1>
-        <p style="white-space: pre-wrap" id="results"></p>
         <table id="table">
         </table>
     </div>
@@ -34,6 +33,7 @@
     <script type="text/javascript">
         var inputText;
         var inputTextLower;
+        var tableText = document.getElementById("table");;
         
         var options = {
               modules: {
@@ -51,19 +51,16 @@
             inputTextLower = inputText.toLowerCase();
 
             if (inputText != "\n") {
-                document.getElementById("results").innerHTML = "";
+                tableText.innerHTML = ""
+                tableText.innerHTML += "<tr><th>Word</th><th>Frequency</th></tr>"
                 textCounter();
             } else {
-                document.getElementById("results").innerHTML = "";
+                tableText.innerHTML = ""
                 document.getElementById("resultsHeader").innerHTML = "";
-                textCounter();
             }
         }
         
         function textCounter() {
-            var tableText = document.getElementById("table");;
-            tableText.innerHTML = ""
-            tableText.innerHTML += "<tr><th>Word</th><th>Frequency</th></tr>"
             var pattern = /\w+/g,
                 string = inputTextLower;
                 matchedWords = string.match( pattern );
@@ -120,6 +117,10 @@
                        'background': 'rgb(34,139,34)'
                    }));
                 }
+            } else {
+                quill.formatText(0, quill.getLength(), {
+                    'background': false,
+                });
             }
         }
     </script>
