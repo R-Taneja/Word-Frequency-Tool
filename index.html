@@ -107,7 +107,7 @@
                 wordToHighlight = wordToHighlight.toLowerCase();
                 inputText = quill.getText();
                 var wordToHighlightWithRegexWordBoundary = `\\b${wordToHighlight}\\b`
-                let re = new RegExp(wordToHighlightWithRegexWordBoundary, "g");
+                let re = new RegExp(wordToHighlightWithRegexWordBoundary, "gi");
                 let match = re.test(inputText);
                 if (match) {
                    let indices = getIndicesOf(re);
