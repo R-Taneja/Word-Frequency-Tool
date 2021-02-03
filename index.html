@@ -61,6 +61,7 @@
         
         function textCounter() {
             var tableText = document.getElementById("table");;
+            tableText.innerHTML = ""
             tableText.innerHTML += "<tr><th>Word</th><th>Frequency</th></tr>"
             var pattern = /\w+/g,
                 string = inputTextLower;
