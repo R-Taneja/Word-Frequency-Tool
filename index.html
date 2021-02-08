@@ -36,17 +36,16 @@
 <body>
     <div class="center">
         <h1>Improve your writing</h1>
-        <p>Reduce the number of repeated words in a text with this free word frequency counter. Try typing one of the repeated words into the search box and clicking "Search" to see exactly where it is in your text.</p>
-        <br>
-        <div style="display: flex;">
-            <input type="text" name="wordToHighlight" id="wordToHighlight" placeholder="Search for a word..." style="float: left;">
-            <button onclick="highlightWord()" style="float: right;">Search</button>
-        </div>
+        <p>Reduce the number of repeated words in a text with this free word frequency counter. Enter your text into the space blow to get started. Then, try typing one of the repeated words into the search box and clicking "Search" to see exactly where it is in your text.</p>
         <br>
         <div id="editor"></div>
         <br>
         <input type="submit" id="submitbutton" value="Submit" style="width: 100%;" onclick="decider()">
         <h1 id="resultsHeader"></h1>
+        <div style="display: none;" id="search">
+            <input type="text" name="wordToHighlight" id="wordToHighlight" placeholder="Search for a word..." style="float: left;">
+            <button onclick="highlightWord()" style="float: right;">Search</button>
+        </div>
         <table id="table">
         </table>
     </div>
@@ -106,6 +105,7 @@
             
             var resultsHeader = document.getElementById("resultsHeader");
             resultsHeader.textContent = "Results";
+            document.getElementById("search").style.display = 'flex';
             document.getElementById("submitbutton").value = "Check again";
         }
         
